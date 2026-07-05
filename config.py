@@ -34,21 +34,18 @@ class Cfg:
     BENCHMARK = "BTCUSDT"                   # buy-hold comparison
 
     # ---- universe filtering (dodge meme/zombie contracts) ----
-    MIN_HISTORY_DAYS = 400                 # need warmup + train/valid/test
-    MIN_AVG_QUOTE_VOL = 50_000_000         # >= $50M avg daily quote volume (liquid)
+    MIN_HISTORY_DAYS = 365                 # need warmup + train/valid/test
+    MIN_AVG_QUOTE_VOL = 10_000_000         # >= $10M avg daily quote volume (liquid)
     EXCLUDE_PREFIXES = ("1000", "1000000", "1MBABYDOGE")   # meme-repriced tickers
     EXCLUDE_SYMBOLS = frozenset({
-        # meme / joke coins
-        "FARTCOINUSDT", "PIPPINUSDT", "JELLYJELLYUSDT", "SIRENUSDT", "PUMPUSDT",
-        "TRUMPUSDT", "BIOUSDT", "IPUSDT",
-        # collapsed / worthless
-        "LUNAUSDT",
-        # delisted or zero-volume zombies
+        # delisted / zero volume
         "BZRXUSDT", "DODOUSDT", "EOSUSDT", "MATICUSDT", "RNDRUSDT",
-        # structurally dead / not tradeable
-        "AXSUSDT", "DASHUSDT", "ZENUSDT",
-        # anomalous volume spike (privacy coin exchange delistings), not real liquidity
+        # collapsed
+        "LUNAUSDT",
+        # anomalous volume spike (privacy coin delistings), not real liquidity
         "ZECUSDT",
+        # structurally dead (last30 < $5M)
+        "AXSUSDT", "DASHUSDT", "ZENUSDT",
     })
 
     # ---- time splits (by DATE, not random — bug#3). test touched exactly once ----
