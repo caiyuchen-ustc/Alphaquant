@@ -49,12 +49,12 @@ class Cfg:
     # ---- interval-aware paths and bar metadata ----
     # Each interval gets its own raw CSV cache and panel directory so all
     # frequencies coexist on disk without clobbering each other.
-    SUPPORTED_INTERVALS = ("1d", "4h", "1h")
-    BARS_PER_DAY = {"1d": 1, "4h": 6, "1h": 24}
-    BARS_PER_YEAR = {"1d": 365.0, "4h": 365.0 * 6, "1h": 365.0 * 24}
+    SUPPORTED_INTERVALS = ("1d", "4h", "1h", "15m")
+    BARS_PER_DAY = {"1d": 1, "4h": 6, "1h": 24, "15m": 96}
+    BARS_PER_YEAR = {"1d": 365.0, "4h": 365.0 * 6, "1h": 365.0 * 24, "15m": 365.0 * 96}
 
     # factor warmup in bars (covers the longest rolling window in factors.py)
-    WARMUP_BARS = {"1d": 60, "4h": 360, "1h": 1440}
+    WARMUP_BARS = {"1d": 60, "4h": 360, "1h": 1440, "15m": 5760}
 
     @classmethod
     def raw_dir(cls, interval: str = "1d") -> Path:
